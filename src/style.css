@@ -1,1 +1,10 @@
+body {
+  margin: 290px auto;
+  border: 5px solid #111111;
+  background: #e7e7cf;
 
+  margin: 40px auto;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 40px;
+}
