@@ -35,11 +35,21 @@ function displayTemperature(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  function search(city){
+    let apiKey = "9a34f9123f26fa9de7f9cfdc91eeea0b";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Cape Town&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayTemperature);
+
 }
 
-let apiKey = "9a34f9123f26fa9de7f9cfdc91eeea0b";
-let city = "Cape Town";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Cape Town&appid=${apiKey}&units=metric`;
-console.log(apiUrl);
 
-axios.get(apiUrl).then(displayTemperature);
+  function handlesubmit(event) {
+    event.preventfault();
+    let cityInputElement =document.querySelector("#city-input");
+    search(cityInputElement.value);
+}
+
+search("Cape Town");
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handlesubmit);
