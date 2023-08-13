@@ -15,11 +15,13 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
-  let forecastHTML = `<div class="row">`;
   let days = ["Thur", "Fri", "Sat", "Sun"];
+
+  let forecastHTML = `<div class="row">`;
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
@@ -42,6 +44,14 @@ function displayForecast() {
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "9a34f9123f26fa9de7f9cfdc91eeea0b";
+  let apiUrl = https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function displayTemperature(response) {
@@ -71,6 +81,8 @@ function search(city) {
   let apiKey = "9a34f9123f26fa9de7f9cfdc91eeea0b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayTemperature);
+
+  getForcast(response.data.coord);
 }
 
 function handlesubmit(event) {
@@ -103,4 +115,3 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displaycelsiusTemperature);
 
 search("Cape Town");
-displayForecast();
